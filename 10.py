@@ -1,5 +1,4 @@
 from aocd import data as input_data
-from itertools import combinations
 from collections import defaultdict
 
 
@@ -17,28 +16,19 @@ def solve_a(data):
 
 
 def solve_b(data):
-    last = data[-1]
     data.insert(0, 0)
     data.append(data[-1] + 3)
-    data.append(data[-1] + 3)
-    data.append(data[-1] + 3)
 
-    i = 1
     last_used = {0: 1}
-    while True:
+    for i in range(1, len(data) - 1):
         prev_last_used = last_used
         last_used = defaultdict(int)
         for f, v in prev_last_used.items():
-            for c in range(3):
-                for x in combinations(data[i:i+3], c + 1):
-                    to_validate = (f,) + x + (data[i + 3], data[i + 4])
-                    if all(to_validate[i + 1] - to_validate[i] <= 3 for i in range(len(to_validate) - 1)):
-                        last_used[x[-1]] += v
+            if data[i + 1] - f <= 3:
+                last_used[f] += v
+            last_used[data[i]] += v
 
-        if len(last_used.keys()) == 1 and list(last_used.keys())[0] > last:
-            return list(last_used.values())[0]
-
-        i += 3
+    return next(iter(last_used.values()))
 
 
 print("Part 1: {}".format(solve_a(parse_data())))
