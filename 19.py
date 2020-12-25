@@ -40,7 +40,7 @@ def checker(text, key, rules):
 
 
 def solve(rules, codes):
-    return len([1 for c in codes if any(c == cc for cc in checker(c, '0', rules))])
+    return sum(1 for c in codes if any(c == cc for cc in checker(c, '0', rules)))
 
 
 def solve_a(data):

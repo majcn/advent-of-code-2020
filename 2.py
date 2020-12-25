@@ -17,7 +17,7 @@ def parse_data():
 def solve_a(data):
     valid_counter = 0
     for entry in data:
-        count = len([1 for x in entry[3] if x == entry[2]])
+        count = sum(1 for x in entry[3] if x == entry[2])
         valid_counter += entry[0] <= count <= entry[1]
     return valid_counter
 

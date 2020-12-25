@@ -36,7 +36,7 @@ def parse_data():
 
 def find_neighbours_occupied(data, x, y):
     neighbours = (x-1, y), (x-1, y+1), (x, y+1), (x+1, y+1), (x+1, y), (x+1, y-1), (x, y-1), (x-1, y-1)
-    return len([1 for n in neighbours if data[n] == State.OCCUPIED_SEAT])
+    return sum(1 for n in neighbours if data[n] == State.OCCUPIED_SEAT)
 
 
 def find_neighbours_occupied_inf(data, x, y):
@@ -94,7 +94,7 @@ def transform(data, apply_rules):
 
 
 def count_occupied(data):
-    return len([1 for v in data.values() if v == State.OCCUPIED_SEAT])
+    return sum(1 for v in data.values() if v == State.OCCUPIED_SEAT)
 
 
 def solve(data, apply_rules):

@@ -81,7 +81,7 @@ def solve_a(data):
 def solve_b(data):
     passports = valid_passports(data)
 
-    return len([1 for passport in passports if all(eval(f'validate_{k}("{v}")') for k, v in passport.items())])
+    return sum(1 for passport in passports if all(eval(f'validate_{k}("{v}")') for k, v in passport.items()))
 
 
 print("Part 1: {}".format(solve_a(parse_data())))
